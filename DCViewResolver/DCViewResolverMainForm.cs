@@ -81,9 +81,9 @@ namespace DCViewResolver
             {
                 dataStore.Clear();
                 HtmlWeb client = new HtmlWeb();
-                for (int webCount = 1; webCount <= 20; ++webCount)
+                for (int webPageCount = 1; webPageCount <= 40; ++webPageCount)
                 {
-                    HtmlAgilityPack.HtmlDocument doc = client.Load(dcviewURL.Replace("{number}", webCount.ToString()));
+                    HtmlAgilityPack.HtmlDocument doc = client.Load(dcviewURL.Replace("{number}", webPageCount.ToString()));
                     HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("/html/body/main/div/div[2]/div[1]/div/table/tbody/tr[*]");
                     for (int i = 1; i < 40; i += 2)
                     {
@@ -150,7 +150,7 @@ namespace DCViewResolver
                 lvi.SubItems.Add(data.Value.price);
                 lvi.SubItems.Add(data.Value.user);
                 lvi.SubItems.Add(data.Value.postDate.ToShortDateString());
-                lvi.SubItems.Add(data.Value.lastUpdate.ToShortDateString());
+                lvi.SubItems.Add(data.Value.lastUpdate.ToShortDateString().Contains("0001/1/1") ? "None" : data.Value.lastUpdate.ToShortDateString());
                 lvi.SubItems.Add(data.Value.complete ? "●" : "");
                 lvi.SubItems.Add(data.Value.link);
                 listView1.Items.Add(lvi);
